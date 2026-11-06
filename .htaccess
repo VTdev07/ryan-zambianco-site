@@ -1,0 +1,24 @@
+# Endereços sem ".html": /portfolio abre o portfolio.html
+Options -MultiViews
+RewriteEngine On
+
+# Sempre com https
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# /index.html ou /index vira /
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index(\.html)?[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# /pagina.html vira /pagina
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# /pagina/ (com barra no fim) vira /pagina
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# /pagina abre pagina.html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
