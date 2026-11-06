@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfólio Ryan Zambianco</title>
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/favicon-180.png">
+<meta name="theme-color" content="#090909">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Sans:wght@400&display=swap">
+<style>
+/* Layout: coluna de 1265px; abertura centralizada, 5 projetos alternando mídia/texto, CTA final */
+:root {
+  color-scheme: dark;
+  --bg: #090909;
+  --fg: #ffffff;
+  --fg-soft: rgba(255,255,255,.86);
+  --fg-muted: rgba(255,255,255,.68);
+  --gray: #8e8e93;
+  --line: rgba(255,255,255,.16);
+  --blue: 31, 91, 255;
+  --indigo: 37, 1, 93;
+  --btn: #ffffff;
+  --btn-fg: #000000;
+  --wa-fg: #052e16;
+  --f-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --f-accent: "Instrument Sans", "Inter", Arial, sans-serif;
+  --wrap: 1265px;
+  --radius: 16px;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-display); font-size: 14px;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+.page {
+  position: relative; isolation: isolate;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+.wrap { max-width: var(--wrap); margin-inline: auto; }
+
+/* fundo roxo da página inteira (Figma, versão nova): centro escuro, roxo mais suave nas laterais,
+   sumindo para o preto no fim (o fade já está no próprio gradiente, sem máscara) */
+.page::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(9,9,9,0) 72%, var(--bg) 100%),
+    radial-gradient(48.8% 58% at 49.6% 18%, rgba(0,0,0,.2) 77.9%, rgba(23,10,30,.275) 83.4%, rgba(46,20,60,.35) 88.9%, rgba(91,40,119,.5) 100%);
+}
+
+/* navegação */
+.nav {
+  position: relative; z-index: 2;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  min-height: 63px; padding-top: 13px;
+}
+.brand {
+  font-weight: 900; font-size: 16px; letter-spacing: .06em; text-transform: uppercase;
+  text-decoration: none;
+}
+.nav-cta { font-weight: 600; font-size: 14px; color: #fcfcfc; text-underline-offset: 3px; }
+
+/* abertura */
+.hero {
+  position: relative; text-align: center;
+  padding-block: clamp(32px, 4.5vw, 40px) clamp(56px, 8vw, 96px);
+  display: grid; justify-items: center; gap: 6px;
+}
+.hero h1 {
+  margin: 0; font-weight: 900; text-transform: uppercase;
+  font-size: clamp(56px, 8.2vw, 118px); line-height: .92; letter-spacing: -.02em;
+}
+.hero .name {
+  margin: 10px 0 0; font-weight: 600; text-transform: uppercase;
+  font-size: clamp(16px, 1.7vw, 24px); letter-spacing: .14em; padding-left: .14em;
+}
+.hero .slogan { margin: 4px 0 0; font-weight: 700; font-size: clamp(18px, 1.6vw, 23px); line-height: 1.3; }
+.hero .manifesto {
+  margin: 30px 0 0; max-width: 737px;
+  font-family: var(--f-accent); font-weight: 400;
+  font-size: clamp(16px, 1.25vw, 18px); line-height: 1.55; letter-spacing: .03em;
+  color: rgba(255,255,255,.8);
+  display: grid; gap: 28px;
+}
+.hero .manifesto p { margin: 0; }
+
+/* projetos */
+.projects { display: grid; gap: clamp(40px, 7vw, 90px); }
+.project {
+  --glow-x: 76%;
+  position: relative; border-radius: 18px;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center; gap: clamp(32px, 5vw, 72px);
+  padding: clamp(24px, 3vw, 40px) clamp(24px, 7vw, 100px);
+  min-height: 697px;
+}
+.project--media-left .media { order: -1; }
+/* brilho claro atrás de cada vídeo, com o card escurecido em volta (Figma) */
+.project--porsche { background: radial-gradient(810px 600px at 24% 50%, rgba(251,249,251,.33) 0%, rgba(188,187,189,.25) 14%, rgba(125,125,126,.17) 28%, rgba(0,0,0,0) 56%), rgba(0,0,0,.2); }
+.project--bmw     { background: radial-gradient(810px 600px at 76% 50%, rgba(255,255,255,0) 0%, rgba(128,128,128,.17) 28%, rgba(64,64,64,.26) 42%, rgba(0,0,0,.34) 56%); }
+.project--corolla { background: radial-gradient(810px 600px at 24% 50%, rgba(255,255,255,.4) 0%, rgba(128,128,128,.45) 21%, rgba(64,64,64,.475) 32%, rgba(0,0,0,.5) 42%); }
+.project--jimny   { background: radial-gradient(880px 650px at 81% 48%, rgba(255,255,255,.25) 0%, rgba(128,128,128,.375) 22%, rgba(64,64,64,.44) 33%, rgba(0,0,0,.5) 44%); }
+.project--nivus   { background: radial-gradient(420px 310px at 18.5% 50%, rgba(255,255,255,.4) 12%, rgba(128,128,128,.55) 47%, rgba(64,64,64,.625) 64%, rgba(0,0,0,.7) 82%); }
+
+.media { display: flex; justify-content: center; min-width: 0; }
+.media img {
+  width: 320px; aspect-ratio: 320 / 569; height: auto; object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.9);
+}
+.media--wide img { width: 570px; aspect-ratio: 570 / 321; }
+
+/* player de vídeo: capa + botão de play, som ligado ao clicar */
+.player { position: relative; width: 320px; max-width: 100%; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+@media (hover: hover) { .player:hover { transform: scale(1.04); } }
+.player video {
+  display: block; width: 100%; height: auto; aspect-ratio: 320 / 569; object-fit: cover;
+  border-radius: var(--radius); background: #000;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.9);
+}
+.player--wide { width: 570px; }
+.player--wide video { aspect-ratio: 570 / 321; }
+.play {
+  position: absolute; inset: 0; margin: auto; width: 84px; height: 84px;
+  border: 0; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center;
+  background: rgba(255,255,255,.92); color: #000;
+  box-shadow: 0 12px 40px -8px rgba(0,0,0,.7), 0 0 0 10px rgba(255,255,255,.18);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.play[hidden] { display: none; }
+.play svg { width: 34px; height: 34px; margin-left: 5px; fill: currentColor; }
+.play:hover { transform: scale(1.06); box-shadow: 0 12px 40px -8px rgba(0,0,0,.7), 0 0 0 14px rgba(255,255,255,.22); }
+.play:focus-visible { outline: 2px solid rgb(var(--blue)); outline-offset: 6px; }
+
+.info { min-width: 0; display: grid; gap: 10px; max-width: 549px; }
+.project--media-left .info { justify-self: start; }
+.eyebrow {
+  margin: 0; font-weight: 700; font-size: 11px; line-height: 1;
+  letter-spacing: .24em; text-transform: uppercase; color: var(--gray);
+}
+.info h2 {
+  margin: 4px 0 0; font-weight: 800; font-size: clamp(32px, 3.4vw, 44px);
+  line-height: 1.05; letter-spacing: -.022em; text-wrap: balance;
+}
+.tags {
+  margin: 4px 0 0; font-weight: 700; font-size: 11px; line-height: 1.5;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--fg-muted);
+}
+.info .desc { margin: 18px 0 0; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--fg); }
+
+/* CTA final */
+.cta {
+  position: relative; border-radius: var(--radius); text-align: center;
+  padding: clamp(56px, 7vw, 80px) clamp(16px, 4vw, 40px) clamp(64px, 8vw, 84px);
+  margin-top: clamp(40px, 6vw, 72px);
+  background: radial-gradient(905px 560px at 48.5% 115%, rgba(0,0,0,.4) 0%, rgba(64,64,64,.3) 19.5%, rgba(128,128,128,.2) 39%, rgba(255,255,255,0) 78%);
+  display: grid; justify-items: center; gap: 20px;
+}
+.cta h2 {
+  margin: 0; font-weight: 800; font-size: clamp(32px, 3.4vw, 48px);
+  line-height: 1.06; letter-spacing: -.01em; text-wrap: balance; max-width: 520px;
+}
+.cta p { margin: 0; max-width: 46ch; font-size: 17px; line-height: 1.55; color: var(--fg-soft); }
+.cta-row { margin-top: 12px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px 32px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 64px; padding: 0 44px; border-radius: 85px;
+  background: var(--btn); color: var(--btn-fg);
+  font-weight: 700; font-size: 16px; letter-spacing: .01em; text-decoration: none;
+  box-shadow: 0 12px 32px -14px rgba(255,255,255,.9), 0 4px 2px rgba(0,0,0,.25);
+  transition: transform .2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.link-ig { font-weight: 600; font-size: 15px; text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid rgb(var(--blue)); outline-offset: 4px; border-radius: 4px; }
+
+/* rodapé */
+footer {
+  margin-top: clamp(56px, 7vw, 96px);
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 24px;
+  font-weight: 500; font-size: 13px; line-height: 1.4;
+}
+footer small { font-size: 13px; color: var(--fg-muted); }
+footer a { color: var(--fg-soft); text-decoration: none; padding-block: 12px; border-bottom: 1px solid var(--line); }
+
+/* WhatsApp flutuante */
+.wa {
+  position: fixed; z-index: 20;
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 56px; padding: 0 22px 0 18px; border-radius: 85px;
+  background: var(--fg); color: var(--wa-fg);
+  font-weight: 700; font-size: 15px; text-decoration: none;
+  box-shadow: 0 14px 34px -12px rgba(0,0,0,.75), 0 0 0 1px rgba(0,0,0,.18);
+}
+.wa svg { width: 22px; height: 22px; flex: none; }
+
+@media (max-width: 860px) {
+  .nav-cta { font-size: 13px; text-align: right; }
+  .project {
+    grid-template-columns: 1fr; min-height: 0; gap: 28px;
+    padding: 24px 16px 32px;
+    background: radial-gradient(90% 45% at 50% 30%, rgba(255,255,255,.25) 0%, rgba(128,128,128,.2) 30%, rgba(0,0,0,.45) 75%) !important;
+  }
+  .project .media { order: -1; }
+  .media img { width: min(280px, 78vw); }
+  .media--wide img { width: 100%; }
+  .player { width: min(280px, 78vw); }
+  .player--wide { width: 100%; }
+  .play { width: 72px; height: 72px; }
+  .cta-row { flex-direction: column; width: 100%; }
+  .btn { width: 100%; padding: 0 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .btn, .play { transition: none; } .btn:hover { transform: none; } }
+
+html.sr-on .page { overflow-x: clip; }
+html.sr-on .sr { backface-visibility: hidden; }   /* cada bloco anima na placa de vídeo, sem redesenhar a página */   /* os blocos que entram pelos lados não criam rolagem lateral */
+/* ---------- entradas ao rolar (estilo da referência): da esquerda, da direita e de baixo ---------- */
+html.sr-ready .sr { transition: opacity .9s ease var(--d, 0s), transform 1.1s cubic-bezier(.2,.7,.2,1) var(--d, 0s); }
+html.sr-on .sr-left:not(.on)   { opacity: 0; transform: translateX(-70px); }
+html.sr-on .sr-right:not(.on)  { opacity: 0; transform: translateX(70px); }
+html.sr-on .sr-bottom:not(.on) { opacity: 0; transform: translateY(60px); }
+/* leve aumento ao passar o mouse */
+.sr-hover { transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+@media (hover: hover) { .sr-hover:hover { transform: scale(1.025); } }
+@media (prefers-reduced-motion: reduce) {
+  html.sr-on .sr { transition: none; }
+  html.sr-on .sr-left:not(.on), html.sr-on .sr-right:not(.on), html.sr-on .sr-bottom:not(.on) { opacity: 1; transform: none; }
+  .sr-hover, .sr-hover:hover { transition: none; transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="wrap">
+    <nav class="nav sr sr-bottom" aria-label="Principal">
+      <a class="brand" href="index.html">Ryan Zambianco</a>
+      <a class="nav-cta" href="https://wa.me/5511959574077" target="_blank" rel="noopener">Pedir orçamento no WhatsApp</a>
+    </nav>
+
+    <header class="hero">
+      <h1 class="sr sr-bottom" style="--d:.1s">Portfólio</h1>
+      <p class="name sr sr-bottom" style="--d:.25s">Ryan Zambianco</p>
+    </header>
+
+    <main class="projects">
+      <article class="project project--porsche project--media-left">
+        <div class="media sr sr-left"><div class="player">
+          <video src="video/porsche.mp4" poster="img/porsche.jpg" preload="none" playsinline width="380" height="677" aria-label="Vídeo: Porsche Panamera cinza no showroom da Marcos Automóveis"></video>
+          <button class="play" type="button" aria-label="Assistir ao vídeo: Porsche Panamera cinza no showroom da Marcos Automóveis"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+        </div></div>
+        <div class="info sr sr-right">
+          <h2>Porsche Panamera</h2>
+          <p class="tags">Captação mobile</p>
+          <p class="desc">Um híbrido de 2022 que merece imagem na altura. Movimentos suaves e planos que mostram o porte e o acabamento, tudo gravado só com o celular.</p>
+        </div>
+      </article>
+
+      <article class="project project--bmw">
+        <div class="info sr sr-left">
+          <h2>BMW 320i</h2>
+          <p class="tags">Captação mobile</p>
+          <p class="desc">Uma M Sport zero km. Enquadramentos fechados nos faróis, nas rodas e no interior, com ritmo pensado pra prender a atenção logo nos primeiros segundos.</p>
+        </div>
+        <div class="media sr sr-right"><div class="player player--wide">
+          <video src="video/bmw.mp4" poster="img/bmw.jpg" preload="none" playsinline width="673" height="379" aria-label="Vídeo: BMW branca de frente em concessionária"></video>
+          <button class="play" type="button" aria-label="Assistir ao vídeo: BMW branca de frente em concessionária"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+        </div></div>
+      </article>
+
+      <article class="project project--corolla project--media-left">
+        <div class="media sr sr-left"><div class="player">
+          <video src="video/corolla.mp4" poster="img/corolla-vert.jpg" preload="none" playsinline width="379" height="674" aria-label="Vídeo: Toyota Corolla preto em concessionária"></video>
+          <button class="play" type="button" aria-label="Assistir ao vídeo: Toyota Corolla preto em concessionária"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+        </div></div>
+        <div class="info sr sr-right">
+          <h2>Toyota Corolla</h2>
+          <p class="tags">Captação mobile</p>
+          <p class="desc">Um sedã que todo mundo conhece, mas que rende um vídeo dinâmico e direto, valorizando a presença e o conforto dele sem enrolação.</p>
+        </div>
+      </article>
+
+      <article class="project project--jimny">
+        <div class="info sr sr-left">
+          <h2>Suzuki Jimny</h2>
+          <p class="tags">Captação mobile</p>
+          <p class="desc">Pequeno, aventureiro e cheio de personalidade. Um vídeo mais animado, que passa a vibe off-road e o carisma que só o Jimny tem.</p>
+        </div>
+        <div class="media sr sr-right"><div class="player">
+          <video src="video/jimny.mp4" poster="img/jimny.jpg" preload="none" playsinline width="382" height="674" aria-label="Vídeo: Suzuki Jimny amarelo em frente à loja"></video>
+          <button class="play" type="button" aria-label="Assistir ao vídeo: Suzuki Jimny amarelo em frente à loja"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+        </div></div>
+      </article>
+
+      <article class="project project--nivus project--media-left">
+        <div class="info sr sr-right">
+          <h2>Volkswagen Nivus</h2>
+          <p class="tags">Captação mobile</p>
+          <p class="desc">Um híbrido de 2022 que merece imagem na altura. Movimentos suaves e planos que mostram o porte e o acabamento, tudo gravado só com o celular.</p>
+        </div>
+        <div class="media sr sr-left"><div class="player">
+          <video src="video/nivus.mp4" poster="img/nivus.jpg" preload="none" playsinline width="382" height="673" aria-label="Vídeo: Volkswagen Nivus prata em frente à Flavel Automóveis"></video>
+          <button class="play" type="button" aria-label="Assistir ao vídeo: Volkswagen Nivus prata em frente à Flavel Automóveis"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+        </div></div>
+      </article>
+    </main>
+
+    <section class="cta sr sr-bottom" aria-labelledby="cta-t">
+      <h2 id="cta-t">Quer um vídeo assim para o seu negócio?</h2>
+      <p>Entre em contato pelo WhatsApp para dar o primeiro passo na produção do seu conteúdo.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://wa.me/5511959574077" target="_blank" rel="noopener">Pedir orçamento no WhatsApp</a>
+        <a class="link-ig" href="https://www.instagram.com/ryanzambianco/" target="_blank" rel="noopener">Ver mais vídeos no Instagram</a>
+      </div>
+    </section>
+
+    <footer class="sr sr-bottom">
+      <small>© 2026 Ryan Zambianco</small>
+      <a href="#politica" data-politica>Política de privacidade</a>
+      <a href="#seo" data-seo>SEO</a>
+    </footer>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/5511959574077" target="_blank" rel="noopener" aria-label="Falar com Ryan Zambianco no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+  WhatsApp
+</a>
+<script>
+document.querySelectorAll('.player').forEach(function (p) {
+  var v = p.querySelector('video'), b = p.querySelector('.play');
+  b.addEventListener('click', function () {
+    document.querySelectorAll('.player video').forEach(function (o) { if (o !== v) o.pause(); });
+    v.controls = true; v.muted = false; b.hidden = true;
+    var r = v.play(); if (r && r.catch) r.catch(function () { b.hidden = false; });
+  });
+  v.addEventListener('ended', function () { v.controls = false; v.currentTime = 0; v.load(); b.hidden = false; });
+});
+</script>
+<script>
+(function () {
+  var root = document.documentElement;
+  if (matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var els = [].slice.call(document.querySelectorAll('.sr'));
+  if (!els.length || !('IntersectionObserver' in window)) return;
+  root.classList.add('sr-on');
+  // o navegador avisa quando cada bloco cruza a linha (80% da tela + 120px): entra ao descer, sai ao voltar para cima
+  var io = null, t = 0;
+  var end = document.createElement('div'); end.setAttribute('aria-hidden', 'true');
+  end.style.cssText = 'position:absolute;left:0;bottom:0;width:1px;height:1px;pointer-events:none';
+  document.querySelector('.page').appendChild(end);
+  function build() {
+    if (io) { io.disconnect(); io = null; }
+    if (root.classList.contains('has-intro')) return;          // espera a abertura terminar
+    var vh = innerHeight, line = vh * .8 + 120;
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        e.target.classList.toggle('on', e.isIntersecting || e.boundingClientRect.top < line);
+      });
+    }, { rootMargin: '100000px 0px ' + Math.round(line - vh) + 'px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+    new IntersectionObserver(function (es) {                  // chegou no fim da página: tudo aparece
+      if (es[0].isIntersecting) els.forEach(function (el) { el.classList.add('on'); });
+    }).observe(end);
+  }
+  addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 150); });
+  new MutationObserver(function () { if (!io) build(); }).observe(root, { attributes: true, attributeFilter: ['class'] });
+  // primeiro mostra o estado escondido sem transição, depois liga as transições e faz a entrada
+  requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.add('sr-ready'); setTimeout(build, 60); }); });
+})();
+</script>
+<script src="politica.js\" charset="utf-8"></script>
+</body>
+</html>

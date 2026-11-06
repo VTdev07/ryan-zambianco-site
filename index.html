@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Ryan Zambianco: fotos e vídeos automotivos para lojas, concessionárias e eventos, além de curso e mentoria para criar conteúdo automotivo com o celular.">
+<style>html,body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
+<title>Ryan Zambianco</title>
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/favicon-180.png">
+<meta name="theme-color" content="#090909">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&family=Instrument+Sans:ital,wght@0,400;0,700;1,700&display=swap">
+<style>
+/* Layout: coluna central de 1265px; hero centralizado + 4 cards horizontais (texto à esquerda, imagem à direita) */
+:root {
+  color-scheme: dark;
+  --bg: #090909;
+  --card: #000000;
+  --fg: #ffffff;
+  --fg-soft: rgba(255,255,255,.8);
+  --fg-muted: rgba(255,255,255,.68);
+  --line: rgba(255,255,255,.16);
+  --violet: #d93bfb;
+  --violet-deep: #6a1fb8;
+  --violet-bg: #5b2877;
+  --btn: #fdfdfd;
+  --btn-fg: #000000;
+  --wa-fg: #052e16;
+  --ph: #141414;
+  --ph-line: rgba(255,255,255,.12);
+
+  --f-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Instrument Sans", "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  --wrap: 1265px;
+  --radius: 16px;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--f-display);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; }
+
+.page {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+  position: relative; isolation: isolate;
+}
+/* fundo roxo da página inteira (Figma: "Fundo roxo — página inteira"):
+   centro escuro, roxo nas bordas, sumindo para o preto na metade de baixo */
+.page::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(9,9,9,0) 55%, var(--bg) 100%),   /* some para o preto embaixo, sem máscara */
+    radial-gradient(49% 57% at 49.6% 18%, rgba(0,0,0,.2) 61%, rgba(91,40,119,.7) 100%);
+  animation: rz-glow 1.6s ease both;
+}
+.wrap { max-width: var(--wrap); margin-inline: auto; }
+
+/* ---------- HERO ---------- */
+
+.hero {
+  position: relative;
+  text-align: center;
+  padding-block: clamp(64px, 9vw, 112px) clamp(48px, 6vw, 72px);
+  display: grid; gap: 10px; justify-items: center;
+}
+.hero .kicker {
+  font-weight: 800; text-transform: uppercase;
+  font-size: clamp(18px, 3.2vw, 46px);
+  letter-spacing: .28em; line-height: 1.2;
+  margin: 0; padding-left: .28em;
+}
+.hero h1 {
+  margin: 0;
+  font-weight: 900; text-transform: uppercase;
+  font-size: clamp(40px, 8.8vw, 126px);
+  letter-spacing: -.02em; line-height: .92;
+  text-wrap: balance;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f3f3 45%, #b9b9bd 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero p.lead {
+  margin: 18px 0 0;
+  max-width: 62ch;
+  font-family: var(--f-body);
+  font-size: clamp(15px, 1.25vw, 18px); line-height: 1.55;
+  letter-spacing: .02em; color: var(--fg-soft);
+}
+.hero p.lead em { font-weight: 700; color: var(--fg); }
+
+/* ---------- CARDS ---------- */
+.cards { display: grid; gap: clamp(32px, 5vw, 74px); }
+.card {
+  position: relative; overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--card);
+  display: grid; grid-template-columns: minmax(0, 526fr) minmax(0, 739fr);
+  min-height: 568px;
+}
+.card .copy {
+  position: relative; z-index: 2;
+  padding: clamp(32px, 7vw, 88px);
+  display: flex; flex-direction: column; justify-content: center; gap: 22px;
+  min-width: 0;
+}
+.eyebrow {
+  margin: 0; font-weight: 700; font-size: 11px; line-height: 1;
+  letter-spacing: .24em; text-transform: uppercase; color: var(--fg);
+}
+.card h2 {
+  margin: -10px 0 0; font-weight: 800; text-transform: uppercase;
+  font-size: clamp(20px, 1.9vw, 24px); line-height: 1.1; letter-spacing: .01em;
+  text-wrap: balance;
+}
+.card .text {
+  margin: 0; font-weight: 500; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.65;
+  color: var(--fg); max-width: 44ch;
+}
+.card .text + .text { margin-top: -8px; }
+.card .tagline { margin: 0; font-weight: 700; font-size: 16px; line-height: 1.4; }
+
+.btn {
+  align-self: flex-start;
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 64px; padding: 0 56px; border-radius: 85px;
+  background: var(--btn); color: var(--btn-fg);
+  font-weight: 700; font-size: 16px; letter-spacing: .01em; text-decoration: none;
+  box-shadow: 0 12px 32px -14px rgba(255,255,255,.9), 0 4px 2px rgba(0,0,0,.6);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -14px rgba(255,255,255,1), 0 4px 2px rgba(0,0,0,.6); }
+.btn:focus-visible { outline: 2px solid var(--violet); outline-offset: 4px; }
+
+/* mídia */
+.media { position: relative; min-width: 0; min-height: 320px; }
+.media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.media.fade::after {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 45%;
+  background: linear-gradient(90deg, var(--card) 0%, rgba(0,0,0,0) 100%);
+  pointer-events: none;
+}
+/* espaço reservado até as imagens chegarem */
+.ph {
+  position: absolute; inset: 0; display: grid; place-items: center; text-align: center;
+  background:
+    repeating-linear-gradient(135deg, var(--ph) 0 14px, #101010 14px 28px);
+  border-left: 1px dashed var(--ph-line);
+  color: var(--fg-muted); font-size: 13px; letter-spacing: .04em; padding: 24px;
+}
+.ph b { display: block; color: var(--fg); font-size: 14px; margin-bottom: 4px; }
+
+/* fundos de cada card (do Figma) */
+.card--curso {
+  background:
+    linear-gradient(115deg, #000 0%, rgba(0,0,0,0) 58%), var(--card);
+  min-height: 621px;
+}
+.card--curso .media { border-radius: var(--radius); overflow: hidden; }
+.card--curso .media img {   /* fade à esquerda, como no Figma */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+}
+@media (max-width: 860px) {
+  .card--curso .media img {
+    -webkit-mask-image: linear-gradient(0deg, transparent 0%, #000 30%);
+            mask-image: linear-gradient(0deg, transparent 0%, #000 30%);
+  }
+}
+.card--mentoria { grid-template-columns: minmax(0, 669fr) minmax(0, 596fr); }
+.media--tiles { display: grid; align-items: center; padding: 24px 24px 24px 0; }
+.tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.tile { border-radius: 10px; overflow: hidden; background: #0d0d0e;
+  transition: transform .45s cubic-bezier(.34,1.56,.64,1); backface-visibility: hidden; }
+.tile img { position: static; display: block; width: 100%; height: auto; }
+.tile:hover { transform: translateY(-8px) scale(1.04); box-shadow: 0 18px 30px -14px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.12); z-index: 1; position: relative; }
+
+/* entrada suave quando a mentoria aparece na tela (só com JS; sem JS tudo já aparece) */
+html.js-reveal .reveal:not(.is-in) .copy > *, html.js-reveal .reveal:not(.is-in) .tile { opacity: 0; }
+html.js-reveal .reveal.is-in .copy > * { animation: rz-rise .9s cubic-bezier(.2,.7,.2,1) backwards; }
+html.js-reveal .reveal.is-in .copy > :nth-child(1) { animation-delay: .05s; }
+html.js-reveal .reveal.is-in .copy > :nth-child(2) { animation-delay: .2s; }
+html.js-reveal .reveal.is-in .copy > :nth-child(3) { animation-delay: .38s; }
+html.js-reveal .reveal.is-in .copy > :nth-child(4) { animation-delay: .54s; }
+html.js-reveal .reveal.is-in .copy > :nth-child(5) { animation-delay: .7s; }
+html.js-reveal .reveal.is-in .tile { animation: rz-pop .8s cubic-bezier(.34,1.4,.64,1) backwards; animation-delay: calc(.25s + var(--i) * .09s); }
+/* arte do curso: aparece devagar quando chega na tela (espera a abertura terminar) */
+html.js-reveal .reveal-img:not(.is-in) .media img, html.has-intro .reveal-img .media img { opacity: 0; }
+html.js-reveal:not(.has-intro) .reveal-img.is-in .media img { animation: rz-slow-in 2.2s cubic-bezier(.22,.61,.36,1) .25s backwards; }
+@keyframes rz-slow-in { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: none; } }
+@keyframes rz-pop { from { opacity: 0; transform: translateY(26px) scale(.94); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html.js-reveal .reveal:not(.is-in) .copy > *, html.js-reveal .reveal:not(.is-in) .tile { opacity: 1; }
+  html.js-reveal .reveal .copy > *, html.js-reveal .reveal .tile, .reveal-img .media img { animation: none !important; }
+  html.js-reveal .reveal-img:not(.is-in) .media img, html.has-intro .reveal-img .media img { opacity: 1; }
+  .tile { transition: none; } .tile:hover { transform: none; }
+}
+.card--portfolio, .card--servicos {
+  min-height: 599px; box-shadow: 0 4px 4px rgba(0,0,0,.25);
+  grid-template-columns: minmax(0, 554fr) minmax(0, 751fr);
+}
+.card--portfolio {
+  background: radial-gradient(70% 90% at 88% 45%, rgba(255,255,255,.26) 0%, rgba(253,253,253,0) 62%), var(--card);
+}
+.card--portfolio .media img { object-position: 30% center; }
+.card--portfolio .statement {
+  margin: 8px 0 12px; font-weight: 700; text-transform: uppercase;
+  font-size: clamp(18px, 1.9vw, 24px); line-height: 1.5; letter-spacing: .1em;
+}
+.card--servicos {
+  background: var(--card);
+}
+.card--servicos .text { font-size: clamp(16px, 1.4vw, 18px); line-height: 1.5; }
+.media--logo { display: grid; place-items: center; }
+.media--logo img { position: static; width: min(100%, 616px); height: auto; aspect-ratio: 1; object-fit: contain; }
+
+/* ---------- FOOTER ---------- */
+footer {
+  margin-top: clamp(56px, 7vw, 96px);
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 24px;
+  font-weight: 500; font-size: 13px; line-height: 1.4;
+}
+footer small { font-size: 13px; color: var(--fg-muted); }
+footer a {
+  color: rgba(255,255,255,.86); text-decoration: none;
+  padding-block: 12px; border-bottom: 1px solid var(--line);
+}
+footer a:hover { border-color: var(--fg); }
+footer .social { display: flex; gap: 10px; margin-right: 8px; }
+footer a.social-link {
+  display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px 0 11px;
+  border: 1px solid var(--line); border-radius: 100px; color: rgba(255,255,255,.86);
+  font-size: 13px; font-weight: 600;
+  transition: border-color .25s ease, background-color .25s ease, color .25s ease, transform .25s ease;
+}
+footer a.social-link svg { width: 18px; height: 18px; flex: none; }
+footer a.social-link:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.06); color: #fff; transform: translateY(-2px); }
+footer a.social-link:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+
+/* ---------- WhatsApp flutuante ---------- */
+.wa {
+  position: fixed; z-index: 20;
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 56px; padding: 0 22px 0 18px; border-radius: 85px;
+  background: var(--fg); color: var(--wa-fg);
+  font-weight: 700; font-size: 15px; text-decoration: none;
+  box-shadow: 0 14px 34px -12px rgba(0,0,0,.75), 0 0 0 1px rgba(0,0,0,.18);
+}
+.wa svg { width: 22px; height: 22px; flex: none; }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 860px) {
+  .card, .card--portfolio { grid-template-columns: 1fr; min-height: 0; }
+  .card .media { order: -1; aspect-ratio: 739 / 621; min-height: 0; max-width: 100%; }
+  .card--mentoria .media { aspect-ratio: auto; }
+  .media--tiles { padding: 16px 16px 0; }
+  .tiles { gap: 6px; }
+  .card--portfolio .media { aspect-ratio: 751 / 599; }
+  .card--servicos .media { aspect-ratio: 1; }
+  .media.fade::after { inset: auto 0 0 0; width: 100%; height: 45%;
+    background: linear-gradient(0deg, var(--card) 0%, rgba(0,0,0,0) 100%); }
+  .ph { border-left: 0; border-bottom: 1px dashed var(--ph-line); }
+  .btn { align-self: stretch; padding: 0 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }
+
+
+/* ---------- entrada suave do "Apresentando Ryan Zambianco" ao abrir o site ---------- */
+.hero > * { animation: rz-rise .9s cubic-bezier(.2,.7,.2,1) both; }
+.hero > :nth-child(1) { animation-delay: .15s; }
+.hero > :nth-child(2) { animation-delay: .3s; }
+.hero > :nth-child(3) { animation-delay: .5s; }
+@keyframes rz-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes rz-glow { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero > *, .page::before { animation: none; }
+}
+
+/* ---------- ABERTURA: ícone da logo e câmera entrando nele ---------- */
+.rz-intro {
+  position: fixed; inset: 0; z-index: 200; cursor: pointer;
+  animation: rz-failsafe 0s linear 10s forwards;            /* se o script falhar, some sozinha */
+}
+.rz-zoom { position: absolute; inset: 0; will-change: transform; }
+.rz-zoom svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+.rz-logo { opacity: 0; filter: blur(14px); transform: scale(.96); transform-box: fill-box; transform-origin: center; }
+.rz-hole-letters { fill-opacity: 0; }
+.rz-name {
+  position: absolute; left: 0; right: 0; margin: 0; text-align: center; color: #fff;
+  font-family: var(--f-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(15px, 2vw, 26px); letter-spacing: .28em; padding-left: .28em;
+  opacity: 0; filter: blur(8px); transform: translateY(10px);
+}
+/* 1. a logo aparece devagar, saindo do desfoque */
+.rz-intro.s1 .rz-logo { opacity: 1; filter: blur(0); transform: none;
+  transition: opacity 1.6s ease, filter 1.8s ease, transform 2.4s cubic-bezier(.16,1,.3,1); }
+.rz-intro.s1 .rz-name { opacity: .92; filter: blur(0); transform: none;
+  transition: opacity 1.4s ease .7s, filter 1.4s ease .7s, transform 1.8s cubic-bezier(.16,1,.3,1) .7s; }
+/* 2. as letras viram janelas para o site */
+.rz-intro.s2 .rz-hole-letters { fill-opacity: 1; }
+.rz-intro.s2 .rz-logo { opacity: 0; transition: opacity 1.1s ease; }
+.rz-intro.s2 .rz-name { opacity: 0; filter: blur(6px); transition: opacity .8s ease, filter .8s ease; }
+/* 3. a câmera entra devagar pela logo e o preto se dissolve no site */
+.rz-intro.s3 .rz-zoom { transform: scale(60); transition: transform 2.6s cubic-bezier(.6,0,.2,1); }
+.rz-intro.s3 { opacity: 0; transition: opacity 1.2s ease 1.5s; }
+.rz-intro.s4 { opacity: 0; transition: opacity .5s ease; pointer-events: none; }
+html.rz-lock, html.rz-lock body { overflow: hidden; }
+html.has-intro .hero > * { animation-play-state: paused; }   /* o "Apresentando" espera a câmera entrar */
+@keyframes rz-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+
+html.sr-on .page { overflow-x: clip; }
+html.sr-on .sr { backface-visibility: hidden; }   /* cada bloco anima na placa de vídeo, sem redesenhar a página */   /* os blocos que entram pelos lados não criam rolagem lateral */
+/* ---------- entradas ao rolar (estilo da referência): da esquerda, da direita e de baixo ---------- */
+html.sr-ready .sr { transition: opacity .9s ease, transform 1.1s cubic-bezier(.2,.7,.2,1); }
+html.sr-on .sr-left:not(.on)   { opacity: 0; transform: translateX(-70px); }
+html.sr-on .sr-right:not(.on)  { opacity: 0; transform: translateX(70px); }
+html.sr-on .sr-bottom:not(.on) { opacity: 0; transform: translateY(60px); }
+/* leve aumento ao passar o mouse */
+.sr-hover { transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+@media (hover: hover) { .sr-hover:hover { transform: scale(1.025); } }
+@media (prefers-reduced-motion: reduce) {
+  html.sr-on .sr { transition: none; }
+  html.sr-on .sr-left:not(.on), html.sr-on .sr-right:not(.on), html.sr-on .sr-bottom:not(.on) { opacity: 1; transform: none; }
+  .sr-hover, .sr-hover:hover { transition: none; transform: none; }
+}
+</style>
+
+<div class="rz-intro" id="rz-intro" aria-hidden="true">
+  <div class="rz-zoom" id="rz-zoom">
+    <svg id="rz-svg" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="rz-shape" fill-rule="evenodd" d="M83,347 L170,378 L128,305 Z M149,244 L84,244 L44,275 L72,337 L125,287 Z M216,204 L167,243 L139,292 L183,370 Z M63,162 L88,228 L144,229 L112,195 Z M45,157 L0,174 L38,260 L74,233 Z M236,101 L152,121 L127,189 L162,226 L221,181 Z M54,69 L7,155 L54,138 L114,179 L137,117 Z M234,86 L178,0 L67,59 L148,106 Z"/>
+        <mask id="rz-hole" maskUnits="userSpaceOnUse" x="-50%" y="-50%" width="200%" height="200%">
+          <rect x="-50%" y="-50%" width="200%" height="200%" fill="#fff"/>
+          <use class="rz-hole-letters rz-place" href="#rz-shape" fill="#000"/>
+        </mask>
+      </defs>
+      <rect x="-50%" y="-50%" width="200%" height="200%" fill="#000" mask="url(#rz-hole)"/>
+      <g class="rz-logo" id="rz-logo"><use class="rz-place" href="#rz-shape" fill="#fff"/></g>
+    </svg>
+  </div>
+</div>
+<script>
+(function () {
+  var box = document.getElementById('rz-intro'); if (!box) return;
+  var root = document.documentElement, zoom = document.getElementById('rz-zoom');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var LW = 236, LH = 378, OX = 184, OY = 156;             // tamanho do ícone e ponto da faceta por onde a câmera entra
+  box.style.animation = 'none';
+  root.classList.add('has-intro', 'rz-lock');
+  var timers = [], ended = false;
+  function layout() {
+    var Wv = innerWidth, Hv = innerHeight;
+    var h = Math.min(Hv * .42, Wv * (Wv < 640 ? .62 : .4) * LH / LW), k = h / LH;
+    var x = Wv / 2 - LW * k / 2, y = Hv / 2 - h / 2;
+    box.querySelectorAll('.rz-place').forEach(function (u) {
+      u.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') scale(' + k.toFixed(4) + ')');
+    });
+    zoom.style.transformOrigin = (x + OX * k).toFixed(1) + 'px ' + (y + OY * k).toFixed(1) + 'px';
+  }
+  function finish() {
+    if (ended) return; ended = true; timers.forEach(clearTimeout);
+    root.classList.remove('has-intro', 'rz-lock');
+    box.classList.add('s4');
+    setTimeout(function () { box.remove(); }, 600);
+  }
+  function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
+  function run() {
+    layout();
+    requestAnimationFrame(function () { requestAnimationFrame(function () { box.classList.add('s1'); }); });
+    if (reduce) { at(1800, finish); return; }
+    at(3000, function () { box.classList.add('s2'); });
+    at(3700, function () { box.classList.add('s3'); });
+    at(4700, function () { root.classList.remove('has-intro'); });   // "Apresentando" começa a subir
+    at(6400, finish);
+  }
+  box.addEventListener('click', finish);                    // clique pula a abertura
+  addEventListener('resize', function () { if (!ended && !box.classList.contains('s3')) layout(); });
+  var started = false;
+  function go() { if (!started) { started = true; run(); } }
+  if (document.fonts && document.fonts.load) { document.fonts.load('800 20px Inter').then(go, go); setTimeout(go, 1200); } else go();
+  setTimeout(finish, 9500);                                 // nunca prende mais que isso
+})();
+</script>
+<div class="page">
+
+  <div class="wrap">
+    <!-- 1. ABERTURA -->
+    <header class="hero">
+      <p class="kicker">Apresentando</p>
+      <h1>Ryan Zambianco</h1>
+    </header>
+
+    <main class="cards">
+      <!-- 2. CURSO -->
+      <section class="card card--curso reveal-img sr sr-left sr-hover" aria-labelledby="t-curso">
+        <div class="copy">
+          <p class="eyebrow">Curso</p>
+          <h2 id="t-curso">Conteúdo automotivo profissional com celular</h2>
+          <p class="text">Domine as técnicas de fotografia, filmagem e edição automotiva e aprenda a transformar gravações feitas com seu celular em conteúdos de qualidade profissional.</p>
+          <a class="btn" href="https://pay.kiwify.com.br/XeBpK8L" target="_blank" rel="noopener">Aprenda com o curso</a>
+        </div>
+        <div class="media" data-slot="curso">
+          <img src="img/curso.jpg" alt="Ryan Zambianco apontando para a câmera na arte do curso Como criar conteúdo automotivo profissional usando apenas um celular" width="739" height="621" decoding="async">
+        </div>
+      </section>
+
+      <!-- 3. MENTORIA -->
+      <section class="card card--mentoria reveal sr sr-right sr-hover" aria-labelledby="t-mentoria">
+        <div class="copy">
+          <p class="eyebrow">Mentoria</p>
+          <h2 id="t-mentoria">Acompanhamento Obsidian</h2>
+          <p class="text">Acompanhamento personalizado e feedbacks individuais para acelerar sua evolução.</p>
+          <p class="text">Tenha orientação direta de quem já ultrapassou 10 milhões de visualizações, além de acesso a uma plataforma exclusiva com dezenas de aulas práticas.</p>
+          <a class="btn" href="https://share.forms.app/agenciaobsidian/mentoria" target="_blank" rel="noopener">Se inscrever na mentoria</a>
+        </div>
+        <div class="media media--tiles" data-slot="mentoria">
+          <ul class="tiles" aria-label="Temas da mentoria">
+            <li class="tile" style="--i:0"><img src="img/mentoria/m1.jpg" alt="Fotos para o dia a dia" width="288" height="565" loading="lazy" decoding="async"></li>
+            <li class="tile" style="--i:1"><img src="img/mentoria/m2.jpg" alt="Fotos para portal de anúncio" width="285" height="565" loading="lazy" decoding="async"></li>
+            <li class="tile" style="--i:2"><img src="img/mentoria/m3.jpg" alt="Fotos detalhadas da dianteira" width="286" height="565" loading="lazy" decoding="async"></li>
+            <li class="tile" style="--i:3"><img src="img/mentoria/m4.jpg" alt="Fotos detalhadas da traseira" width="288" height="565" loading="lazy" decoding="async"></li>
+            <li class="tile" style="--i:4"><img src="img/mentoria/m5.jpg" alt="Edição no CapCut PC" width="287" height="511" loading="lazy" decoding="async"></li>
+            <li class="tile" style="--i:5"><img src="img/mentoria/m6.jpg" alt="Edição no Edits pelo celular" width="285" height="511" loading="lazy" decoding="async"></li>
+            <li class="tile" style="--i:6"><img src="img/mentoria/m7.jpg" alt="Edição no Canva (fotos)" width="285" height="511" loading="lazy" decoding="async"></li>
+            <li class="tile" style="--i:7"><img src="img/mentoria/m8.jpg" alt="Músicas para edição" width="287" height="511" loading="lazy" decoding="async"></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 4. PORTFÓLIO -->
+      <section class="card card--portfolio sr sr-left sr-hover" aria-labelledby="t-portfolio">
+        <div class="copy">
+          <p class="eyebrow">Portfólio</p>
+          <h2 id="t-portfolio">Produção Obsidian</h2>
+          <p class="text">Separei alguns dos vídeos de carros que já produzi pra você dar uma olhada! Cada projeto tem um estilo diferente, mas todos têm o mesmo objetivo: valorizar cada detalhe do carro e criar vídeos que realmente chamam a atenção.</p>
+          <a class="btn" href="portfolio.html">Conhecer portfólio</a>
+        </div>
+        <div class="media fade" data-slot="corolla">
+          <img src="img/corolla.jpg" alt="Toyota Corolla preto em showroom" width="1448" height="1086" loading="lazy" decoding="async">
+        </div>
+      </section>
+
+      <!-- 5. SERVIÇOS / ORÇAMENTO -->
+      <section class="card card--servicos sr sr-right sr-hover" aria-labelledby="t-servicos">
+        <div class="copy">
+          <p class="eyebrow">Serviços</p>
+          <h2 id="t-servicos">Contrate a Obsidian</h2>
+          <p class="text">Se você trabalha no mercado automotivo e quer se destacar nas redes sociais, a gente pode te ajudar! Unimos criatividade, produção de vídeos profissionais e estratégias de marketing para fazer sua marca chamar a atenção e conquistar mais clientes.</p>
+          <a class="btn" href="https://wa.me/5511959574077" target="_blank" rel="noopener">Pedir um orçamento</a>
+        </div>
+        <div class="media media--logo" data-slot="obsidian">
+          <img src="img/obsidian.jpg" alt="Logo da Agência Obsidian" width="1254" height="1254" loading="lazy" decoding="async">
+        </div>
+      </section>
+    </main>
+
+    <footer class="sr sr-bottom">
+      <div class="social" aria-label="Redes sociais">
+        <a class="social-link" href="https://www.instagram.com/ryanzambianco/" target="_blank" rel="noopener" aria-label="Instagram do Ryan Zambianco">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.8l1.4-2h4.6l1.4 2h1.8A2.5 2.5 0 0 1 20 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5z"/><circle cx="12" cy="12.8" r="3.6"/></svg>
+          <span>Instagram</span>
+        </a>
+        <a class="social-link" href="https://www.youtube.com/@ryanzambiancoads" target="_blank" rel="noopener" aria-label="Canal do Ryan Zambianco no YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="3.5"/><path d="M10.5 9.5v5l4.3-2.5z" fill="currentColor"/></svg>
+          <span>YouTube</span>
+        </a>
+      </div>
+      <small>© 2026 Ryan Zambianco</small>
+      <a href="#politica" data-politica>Política de privacidade</a>
+      <a href="#seo" data-seo>SEO</a>
+    </footer>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/5511959574077" target="_blank" rel="noopener" aria-label="Falar com Ryan Zambianco no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+  WhatsApp
+</a>
+<script>
+(function () {
+  var els = document.querySelectorAll('.reveal, .reveal-img');
+  if (!els.length || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js-reveal');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { threshold: .2 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+<script>
+(function () {
+  var root = document.documentElement;
+  if (matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var els = [].slice.call(document.querySelectorAll('.sr'));
+  if (!els.length || !('IntersectionObserver' in window)) return;
+  root.classList.add('sr-on');
+  // o navegador avisa quando cada bloco cruza a linha (80% da tela + 120px): entra ao descer, sai ao voltar para cima
+  var io = null, t = 0;
+  var end = document.createElement('div'); end.setAttribute('aria-hidden', 'true');
+  end.style.cssText = 'position:absolute;left:0;bottom:0;width:1px;height:1px;pointer-events:none';
+  document.querySelector('.page').appendChild(end);
+  function build() {
+    if (io) { io.disconnect(); io = null; }
+    if (root.classList.contains('has-intro')) return;          // espera a abertura terminar
+    var vh = innerHeight, line = vh * .8 + 120;
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        e.target.classList.toggle('on', e.isIntersecting || e.boundingClientRect.top < line);
+      });
+    }, { rootMargin: '100000px 0px ' + Math.round(line - vh) + 'px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+    new IntersectionObserver(function (es) {                  // chegou no fim da página: tudo aparece
+      if (es[0].isIntersecting) els.forEach(function (el) { el.classList.add('on'); });
+    }).observe(end);
+  }
+  addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 150); });
+  new MutationObserver(function () { if (!io) build(); }).observe(root, { attributes: true, attributeFilter: ['class'] });
+  // primeiro mostra o estado escondido sem transição, depois liga as transições e faz a entrada
+  requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.add('sr-ready'); setTimeout(build, 60); }); });
+})();
+</script>
+<script src="politica.js\" charset="utf-8"></script>
+
+</body>
+</html>
