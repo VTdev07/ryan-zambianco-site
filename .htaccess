@@ -6,6 +6,11 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# O portfólio fica em /portifolio (quem digitar /portfolio ou /portfolio.html é levado para lá)
+RewriteCond %{THE_REQUEST} \s/+portfolio(\.html)?/?[\s?] [NC]
+RewriteRule ^ /portifolio [R=301,L]
+RewriteRule ^portifolio$ portfolio.html [L,NC]
+
 # /index.html ou /index vira /
 RewriteCond %{THE_REQUEST} \s/+(.*/)?index(\.html)?[\s?] [NC]
 RewriteRule ^ /%1 [R=301,L]
