@@ -1,0 +1,43 @@
+name: Deploy na HostGator
+
+# Sobe o site para a HostGator a cada push na main.
+# Também dá para rodar manualmente em Actions > "Deploy na HostGator" > Run workflow.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Nunca roda dois deploys ao mesmo tempo (o mais novo espera o anterior terminar)
+concurrency:
+  group: deploy-hostgator
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      # Envia só os arquivos que mudaram desde o último deploy (FTP com TLS).
+      # O estado fica no arquivo .ftp-deploy-sync-state.json dentro da pasta do site.
+      - name: Enviar via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          # Pasta do site no servidor (sempre terminando em "/").
+          # Conta FTP principal do cPanel: public_html/  |  Conta FTP criada já apontando para public_html: ./
+          server-dir: ${{ vars.FTP_SERVER_DIR || 'public_html/' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            screenshots/**
+            README.md
+            .nojekyll
+            .DS_Store
+            **/.DS_Store
